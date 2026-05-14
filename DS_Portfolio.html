@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Digital Hustle Report — Lungile Zulu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Source+Code Pro:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Variables (Minimalist, Clean) ───────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #F8FAFC;
+      --surface:   #FFFFFF;
+      --surface-2: #F1F5F9;
+      --text:      #0F172A;
+      --text-muted:#475569;
+      --border:    #E2E8F0;
+      --accent:    #0F172A;
+      --accent-l:  #334155;
+      --accent-bg: #F1F5F9;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    section:last-child { border-bottom: none; }
+
+    /* ── Typography ─────────────────────────────────── */
+    a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    a:hover { color: var(--accent); }
+
+    .mono {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.85rem;
+    }
+
+    /* ── Layout ───────────────────────────────────── */
+    nav {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .nav-brand {
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Hero ─────────────────────────────────────── */
+    #hero {
+      padding: 5rem 0 4rem 0;
+    }
+    .hero-tag {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, var(--text), var(--accent-l));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 1rem;
+    }
+    .hero-brief {
+      background: var(--surface-2);
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.5rem;
+      max-width: 640px;
+      margin: 1.5rem 0 2rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+    .btn-primary:hover {
+      background: var(--accent-l);
+      color: white;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-num {
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Section Headers ─────────────────────────── */
+    .section-label {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    /* ── Narrative Strip ─────────────────────────── */
+    .narrative-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .narrative-step {
+      padding: 1.5rem;
+      border-right: 1px solid var(--border);
+    }
+    .narrative-step:last-child { border-right: none; }
+    .step-num {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--accent-l);
+      margin-bottom: 0.5rem;
+    }
+    .step-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+    .step-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ── Project Cards ───────────────────────────── */
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 3rem;
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-2);
+    }
+    .card-chapter {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      margin-bottom: 0.25rem;
+    }
+    .card-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .tools {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+    .tool-tag {
+      background: var(--surface-2);
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+    .card-body {
+      padding: 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .finding-list {
+      list-style: none;
+      margin-top: 0.75rem;
+    }
+    .finding-list li {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      display: flex;
+      gap: 8px;
+    }
+    .finding-list li::before {
+      content: "—";
+      color: var(--accent);
+    }
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .project-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+
+    /* ── Skills ──────────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem;
+    }
+    .skill-name {
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 0.25rem;
+    }
+    .skill-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ── About ───────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .about-name {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .about-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .ai-box {
+      background: var(--surface-2);
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin: 1rem 0;
+    }
+    .timeline-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .timeline-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 0.5rem;
+    }
+
+    /* ── Footer ──────────────────────────────────── */
+    footer {
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    @media (max-width: 700px) {
+      .card-body { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <span class="nav-brand">Lungile Zulu · Data Portfolio</span>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="https://medium.com/@tech-with-thelma" target="_blank">Medium</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <!-- Hero -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-tag">Data Science Portfolio · May 2026</div>
+      <h1 class="hero-title">The Digital<br><span>Hustle Report</span></h1>
+      <p class="hero-subtitle">A data-driven investigation into online income streams.</p>
+      <div class="hero-brief">
+        An aspiring entrepreneur keeps failing to launch online. This portfolio is the analyst's answer: three interconnected projects that diagnose the problem and build tools to fix it.
+      </div>
+      <div class="btn-group">
+        <a href="#projects" class="btn btn-primary">View Projects ↓</a>
+        <a href="https://github.com/Thelma2002" target="_blank" class="btn">GitHub</a>
+        <a href="https://www.linkedin.com/in/thellu/" target="_blank" class="btn">LinkedIn</a>
+      </div>
+      <div class="hero-stats">
+        <div><span class="stat-num">3</span><div class="stat-label">Connected Projects</div></div>
+        <div><span class="stat-num">29</span><div class="stat-label">Models Analysed</div></div>
+        <div><span class="stat-num">20K</span><div class="stat-label">Campaign Records</div></div>
+        <div><span class="stat-num">Live</span><div class="stat-label">ML Web App</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Narrative Strip -->
+  <section id="narrative" style="padding-top: 0;">
+    <div class="container">
+      <div class="narrative-grid">
+        <div class="narrative-step"><div class="step-num">01.</div><div class="step-title">Score</div><div class="step-desc">29 business models, 9 criteria.</div></div>
+        <div class="narrative-step"><div class="step-num">02.</div><div class="step-title">Autopsy</div><div class="step-desc">20,000 marketing campaigns.</div></div>
+        <div class="narrative-step"><div class="step-num">03.</div><div class="step-title">Predict</div><div class="step-desc">ML model for 6‑month success odds.</div></div>
+        <div class="narrative-step"><div class="step-num">04.</div><div class="step-title">Deploy</div><div class="step-desc">Live Streamlit web app.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-label">The Investigation</div>
+
+      <!-- Project 1 -->
+      <div class="project-card">
+        <div class="card-header">
+          <div class="card-chapter">Project 01 · Excel</div>
+          <div class="card-title">Side Hustle Opportunity Scorecard</div>
+          <div class="card-subtitle">Which online business models survive a data-driven stress test for the South African market?</div>
+          <div class="tools">
+            <span class="tool-tag">Google Sheets</span><span class="tool-tag">SUMPRODUCT</span><span class="tool-tag">VLOOKUP</span><span class="tool-tag">Conditional Formatting</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div>
+            <div style="font-weight: 600; margin-bottom: 0.5rem;">Key Findings</div>
+            <ul class="finding-list">
+              <li>Tech & SaaS leads all categories — No-code Apps and AI Video Editing score 7.4/10</li>
+              <li>Dropshipping scores only 4.5/10 — USD exposure kills ZA viability</li>
+              <li>Passive income models score 1.2 points higher on average than active ones</li>
+            </ul>
+          </div>
+          <div class="links">
+            <a href="https://docs.google.com/spreadsheets/d/1z3OrMHs6CyEHa3nuFF5V1Q9MxBbWLh54G0PWTZopwCc/edit?usp=sharing" target="_blank" class="project-link">📊 Live Scorecard (Google Sheets)</a>
+            <a href="https://medium.com/@tech-with-thelma/project-1-of-3-the-digital-hustle-report-which-online-side-hustles-actually-work-in-south-africa-916ce696c170" target="_blank" class="project-link">📝 Read the Blog Post</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card">
+        <div class="card-header">
+          <div class="card-chapter">Project 02 · SQL + Python</div>
+          <div class="card-title">Digital Marketing Autopsy</div>
+          <div class="card-subtitle">Which campaign channels actually convert — and where is budget wasted?</div>
+          <div class="tools"><span class="tool-tag">SQLite</span><span class="tool-tag">Pandas</span><span class="tool-tag">Seaborn</span><span class="tool-tag">Matplotlib</span></div>
+        </div>
+        <div class="card-body">
+          <div>
+            <div style="font-weight: 600; margin-bottom: 0.5rem;">Key Findings</div>
+            <ul class="finding-list">
+              <li>Influencer campaigns have the highest conversion rate</li>
+              <li>YouTube delivers the best ROI — long-form content compounds</li>
+              <li>Health & Wellness and Tech Enthusiasts are the most valuable segments</li>
+            </ul>
+          </div>
+          <div class="links">
+            <a href="https://github.com/Thelma2002/Digital_Marketing-Autopsy" target="_blank" class="project-link">⌨️ GitHub Repository</a>
+            <a href="https://medium.com/@tech-with-thelma/project-2-of-3-digital-marketing-autopsy-which-campaign-channels-actually-convert-de7714dc2b83" target="_blank" class="project-link">📝 Read the Blog Post</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card">
+        <div class="card-header">
+          <div class="card-chapter">Project 03 · Machine Learning · Live App</div>
+          <div class="card-title">WillItWork? — Hustle Success Predictor</div>
+          <div class="card-subtitle">A deployed ML app that predicts if your side hustle will be profitable within 6 months.</div>
+          <div class="tools"><span class="tool-tag">Scikit-learn</span><span class="tool-tag">Random Forest</span><span class="tool-tag">Streamlit</span></div>
+        </div>
+        <div class="card-body">
+          <div>
+            <div style="font-weight: 600; margin-bottom: 0.5rem;">Model & Tool</div>
+            <ul class="finding-list">
+              <li>Trained on 1,500 records using viability scores from Project 1</li>
+              <li>Feature importance reveals top predictors of online business success</li>
+              <li>Generates personalised advice based on your inputs</li>
+            </ul>
+          </div>
+          <div class="links">
+            <a href="https://willitwork-predictor-ltzulu.streamlit.app/" target="_blank" class="project-link">🚀 Live App (Try It Now)</a>
+            <a href="https://github.com/Thelma2002/willitwork-predictor" target="_blank" class="project-link">⌨️ GitHub Repository</a>
+            <a href="https://medium.com/@tech-with-thelma/project-3-of-3-the-hustle-success-predictor-will-your-side-hustle-actually-work-692a98955eb4" target="_blank" class="project-link">📝 Read the Blog Post</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-label">Tools & Skills</div>
+      <div class="skills-grid">
+        <div class="skill-card"><div class="skill-name">Excel / Sheets</div><div class="skill-desc">SUMPRODUCT, dynamic arrays, what-if tools</div></div>
+        <div class="skill-card"><div class="skill-name">SQL · SQLite</div><div class="skill-desc">Aggregations, CTEs, analytical queries</div></div>
+        <div class="skill-card"><div class="skill-name">Python · Pandas</div><div class="skill-desc">Data cleaning, EDA, feature engineering</div></div>
+        <div class="skill-card"><div class="skill-name">Visualisation</div><div class="skill-desc">Seaborn, Matplotlib, heatmaps, distributions</div></div>
+        <div class="skill-card"><div class="skill-name">Machine Learning</div><div class="skill-desc">Random Forest, train/test, feature importance</div></div>
+        <div class="skill-card"><div class="skill-name">Deployment</div><div class="skill-desc">Streamlit, GitHub Pages, cloud app hosting</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="section-label">The Analyst</div>
+      <div class="about-grid">
+        <div>
+          <div class="about-name">Lungile Zulu</div>
+          <div class="about-text">Data Science student with a specific interest in the creator economy and online business space. These projects came from a real frustration: repeatedly failing to launch online without understanding why. I decided to let the data answer that question.</div>
+          <div class="ai-box">
+            <strong>On AI use:</strong> AI was used as a research accelerator and debugging assistant — not as a replacement for analysis. All business interpretations, weight decisions, SA market context, and analytical conclusions are original.
+          </div>
+          <div class="btn-group">
+            <a href="https://github.com/Thelma2002" class="btn">GitHub</a>
+            <a href="https://www.linkedin.com/in/thellu/" class="btn">LinkedIn</a>
+            <a href="https://medium.com/@tech-with-thelma" class="btn">Medium</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight: 600; margin-bottom: 1rem;">Project Connections</div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div>Project 1 viability scores → used to generate Project 3 training data.</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div>Project 2 channel analysis → validates Scorecard platform recommendations.</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div>Project 3 app references Project 1 scores directly in the UI.</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Limitation:</strong> ML training data is synthetic — a production version would use real survey data.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div>Lungile Zulu · Data Science Portfolio · May 2026</div>
+      <div><a href="https://github.com/Thelma2002" target="_blank">GitHub</a> · <a href="https://www.linkedin.com/in/thellu/" target="_blank">LinkedIn</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
